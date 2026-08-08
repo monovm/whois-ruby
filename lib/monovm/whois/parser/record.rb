@@ -7,8 +7,8 @@ module MonoVM
     module Parser
       # A registration, parsed into typed fields.
       #
-      # The PHP package hands back the raw response and stops there, so every caller
-      # that wants an expiry date writes its own regexp — once per registry format.
+      # A library that hands back only the raw response leaves every caller that
+      # wants an expiry date writing its own regexp — once per registry format.
       # This is that work done once.
       #
       # {#fields} keeps every key/value the parser saw, so nothing is lost to the

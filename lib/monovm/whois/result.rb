@@ -80,7 +80,7 @@ module MonoVM
       end
 
       # The raw text the registry sent, or the explanatory message when no server
-      # was reached. Named for the PHP package's +getWhoisMessage()+.
+      # was reached. Also aliased as +getWhoisMessage+ on {WhoisHandler}.
       def whois_message
         return response.text if response
 

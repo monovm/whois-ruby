@@ -149,8 +149,8 @@ RSpec.describe MonoVM::Whois::Checker do
       described_class.send(:build_options, options)
     end
 
-    it "accepts the PHP package's camelCase option name" do
-      # Kept so code being ported from monovm/whois-php keeps working verbatim.
+    it "accepts the camelCase option name alias" do
+      # Kept so code written against camelCase WHOIS APIs keeps working verbatim.
       checker = described_class.new(**build(popularTLDs: [".io"]))
 
       expect(checker.popular_tlds).to eq([".io"])

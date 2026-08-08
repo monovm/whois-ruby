@@ -10,8 +10,8 @@ module MonoVM
         # the TLD definition.
         #
         # This is the curated, high-confidence signal — +"No match for"+ for Verisign,
-        # +"Domain not found"+ for PIR — and the PHP package checks it first, before
-        # anything else.
+        # +"Domain not found"+ for PIR — and the obvious design would check it first,
+        # before anything else.
         #
         # Here it runs *after* the rules that establish a registration, and that
         # reordering fixes a real failure mode: when a TLD is mapped to the wrong

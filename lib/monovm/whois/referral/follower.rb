@@ -11,9 +11,8 @@ module MonoVM
       # Verisign and the other thin registries hold almost nothing: query +.com+ and
       # the answer is a domain name, a status, nameservers, and a +Registrar WHOIS
       # Server+ line pointing at whoever sold it. The registrant, the contact details
-      # and often the accurate expiry date are only on that second server. The PHP
-      # package stops at the first answer and reports the thin record as the whole
-      # truth.
+      # and often the accurate expiry date are only on that second server. A client
+      # that stops at the first answer reports the thin record as the whole truth.
       #
       # One deliberate constraint: a referral enriches the *record*, never the
       # verdict. The registry is authoritative about whether a name exists, and a

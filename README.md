@@ -3,8 +3,7 @@
 Domain WHOIS and RDAP lookups for Ruby, with availability detection that says
 "I don't know" instead of guessing.
 
-A Ruby counterpart to [monovm/whois-php](https://github.com/monovm/whois-php), written
-from scratch rather than transliterated. No runtime dependencies.
+No runtime dependencies.
 
 ```ruby
 require "monovm-whois"
@@ -30,8 +29,7 @@ Requires Ruby 3.1 or newer.
 
 ## Why the availability status has four values
 
-Most WHOIS libraries, including the PHP package this one follows, answer "is this
-domain available?" with a boolean. That collapses two very different situations —
+Most WHOIS libraries answer "is this domain available?" with a boolean. That collapses two very different situations —
 *this domain is registered* and *I could not find out* — into the same `false`.
 
 The expensive failure is the other direction. A WHOIS server that is rate-limiting
@@ -143,9 +141,10 @@ Every rule that was consulted is in the trace, in order, with the one that decid
 the text it matched. This is the first thing to reach for when a classification looks
 wrong.
 
-### PHP-compatible handler
+### Single-domain handler
 
-For code being ported from `monovm/whois-php`, including the camelCase names:
+`WhoisHandler` wraps one lookup in an object, with camelCase aliases for code
+being migrated from camelCase WHOIS APIs:
 
 ```ruby
 handler = MonoVM::Whois::WhoisHandler.whois("monovm.com")
@@ -157,8 +156,8 @@ handler.tld                  # also handler.getTld
 handler.availability_details # also handler.getAvailabilityDetails
 ```
 
-The one difference that cannot be aliased away is the four-state verdict described
-above. `handler.unknown?` is new, and it matters.
+The four-state verdict described above applies here too: `handler.unknown?` is a
+real answer, distinct from both `available?` and `registered?`.
 
 ### Command line
 
@@ -310,11 +309,12 @@ Registries are queried in Punycode by default, because Verisign answers "No matc
 a UTF-8 query — which would read as availability. DENIC is the documented exception and
 is sent the Unicode form over port 43 (`config.unicode_query_tlds`).
 
-## Differences from the PHP package
+## Fail-safe classifications
 
-Behaviour that deliberately differs, all in the same direction — refusing to guess:
+Situations that a permissive heuristic reads as "available", and what this gem
+reports instead — every choice points the same way, refusing to guess:
 
-| Situation | `whois-php` | this gem |
+| Situation | Permissive heuristic | This gem |
 |---|---|---|
 | Rate-limit notice | `available` | `:unknown` |
 | Client blocked / port 43 retired | `available` | `:unknown` |
@@ -326,10 +326,6 @@ Behaviour that deliberately differs, all in the same direction — refusing to g
 | Premium/reserved name | `available` | `:premium` |
 | Dot-padded keys (`status....: Registered`) | `available` | `:registered` |
 | Registry restriction notice | `available` | `:registered` |
-
-Also new here: RDAP with IANA bootstrap, referral following, structured record
-parsing, concurrent bulk checks, caching, per-host throttling, retries, a rule chain
-that can be extended without forking, a CLI, and IDN support.
 
 ## Development
 

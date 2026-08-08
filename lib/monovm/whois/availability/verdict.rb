@@ -5,8 +5,8 @@ module MonoVM
     module Availability
       # The outcome of analysing one response.
       #
-      # This is the central correction to the PHP package's design. There,
-      # +isAvailable()+ returns a boolean, so "this domain is registered" and "the
+      # This is the central design decision. With a boolean-only
+      # +isAvailable()+, "this domain is registered" and "the
       # server would not tell me" collapse into the same +false+ — and, worse, a
       # response that carries no verdict at all falls through the detector's
       # heuristics and comes back +true+. A rate-limited registry then reports

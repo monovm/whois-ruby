@@ -8,7 +8,7 @@ module MonoVM
       module Rules
         # An explicit status field stating the name is free.
         #
-        # The PHP original pairs this check with a second inference: "fewer than two
+        # Some detectors pair this check with a second inference: "fewer than two
         # registration fields present" also counts as availability. That inference is
         # unsound and is deliberately not reproduced. Every response that is not a
         # record has fewer than two registration fields — a rate-limit notice, a

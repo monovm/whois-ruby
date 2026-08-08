@@ -43,10 +43,10 @@ module MonoVM
         # Wording registries use when they will not answer: rate limits, blocked
         # clients, and port 43 endpoints retired in favour of RDAP.
         #
-        # None of this is in the PHP original, where each of these responses falls
-        # through the heuristics and comes back "available" — so a rate-limited
-        # registry reports every registered domain as free to register. This table
-        # is the single most important correctness fix in the library.
+        # Without this table each of these responses would fall through the
+        # heuristics and come back "available" — a rate-limited registry would
+        # report every registered domain as free to register. This table is the
+        # single most important correctness guard in the library.
         REFUSAL = [
           # Rate limiting: .pl, .lu, .cz, .ru, .dk and others.
           /request(?:s)?\s+limit\s+exceeded/i,
@@ -110,8 +110,8 @@ module MonoVM
         # Banners of the IP-address registries.
         #
         # Reaching one of these means a TLD is mapped to the wrong server. They
-        # answer +%ERROR:101: no entries found+ to any domain query, which the PHP
-        # original reads as availability for every name under that TLD.
+        # answer +%ERROR:101: no entries found+ to any domain query, which a naive
+        # detector reads as availability for every name under that TLD.
         WRONG_REGISTRY_BANNERS = [
           /this\s+is\s+the\s+ripe\s+database\s+query\s+service/i,
           /the\s+objects\s+are\s+in\s+rpsl\s+format/i,
@@ -170,7 +170,7 @@ module MonoVM
           ".uk" => [/this\s+domain\s+has\s+been\s+registered/i, /\bregistered\b/i],
           ".co.uk" => [/this\s+domain\s+has\s+been\s+registered/i, /\bregistered\b/i],
           # DENIC. "Status: invalid" means the name cannot be registered as spelled;
-          # it must never read as available. Not in the PHP original.
+          # it must never read as available.
           ".de" => [
             Regexp.new(status_is("connect", "registered", "active", "invalid", "failed"),
                        Regexp::IGNORECASE)

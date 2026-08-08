@@ -61,8 +61,8 @@ RSpec.describe MonoVM::Whois::WhoisHandler do
     subject(:handler) { handler_for("Query limit exceeded. Try again later.") }
 
     it "is not available" do
-      # The PHP original reports this as available, which for a registrar means
-      # offering a registered domain for sale.
+      # A permissive detector reports this as available, which for a registrar
+      # means offering a registered domain for sale.
       expect(handler).not_to be_available
     end
 
@@ -115,7 +115,7 @@ RSpec.describe MonoVM::Whois::WhoisHandler do
   describe "camelCase aliases" do
     subject(:handler) { handler_for("No match for EXAMPLE.COM") }
 
-    it "keeps the PHP method names working" do
+    it "keeps the camelCase method names working" do
       expect(handler.isAvailable).to be(true)
       expect(handler.isValid).to be(true)
       expect(handler.isPremium).to be(false)

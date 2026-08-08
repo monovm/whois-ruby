@@ -37,7 +37,7 @@ RSpec.describe MonoVM::Whois::Availability::Analyzer do
 
   describe "the absence of registration fields" do
     it "is not treated as availability on its own" do
-      # This is the inference the PHP original makes and this port refuses to: a
+      # This is the inference permissive detectors make and this gem refuses to: a
       # response with fewer than two registration fields is not thereby a free
       # domain. Without an opt-in, the verdict must be unknown.
       verdict = analyzer.analyze(

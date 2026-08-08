@@ -31,10 +31,10 @@ module MonoVM
 
         attr_reader :open_timeout, :read_timeout, :verify_ssl, :user_agent
 
-        # @param verify_ssl [Boolean] verify TLS certificates. Defaults to true,
-        #   unlike the PHP package which disables verification outright. A handful
-        #   of registry endpoints do serve broken chains; those deployments can opt
-        #   out explicitly rather than everyone losing the guarantee silently.
+        # @param verify_ssl [Boolean] verify TLS certificates. Defaults to true.
+        #   A handful of registry endpoints do serve broken chains; those
+        #   deployments can opt out explicitly rather than everyone losing the
+        #   guarantee silently.
         def initialize(open_timeout: DEFAULT_OPEN_TIMEOUT, read_timeout: DEFAULT_READ_TIMEOUT,
                        verify_ssl: true, user_agent: nil)
           @open_timeout = open_timeout

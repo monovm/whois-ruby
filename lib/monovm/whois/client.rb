@@ -202,8 +202,8 @@ module MonoVM
         value.nil? || (value.respond_to?(:empty?) && value.empty?)
       end
 
-      # Map a transport failure onto a result. The distinction being preserved here is
-      # the one the PHP package loses: "we could not find out" is not "it is free".
+      # Map a transport failure onto a result. The distinction being preserved here:
+      # "we could not find out" is not "it is free".
       def failure_result(name, resolution, failure)
         case failure
         when UnsupportedTldError

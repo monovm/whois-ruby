@@ -42,7 +42,7 @@ module MonoVM
 
         private
 
-        # Accept the PHP package's camelCase key alongside the Ruby one, and route
+        # Accept the camelCase alias key alongside the Ruby one, and route
         # everything else at the configuration.
         def build_options(options)
           options = options.to_h.dup

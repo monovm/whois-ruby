@@ -2,8 +2,8 @@
 
 # Responses where the server did not answer the question asked.
 #
-# Each of these is classified "available" by the PHP implementation, because its
-# detector treats the absence of registration data as evidence of availability. For a
+# Each of these is classified "available" by a permissive detector that treats the
+# absence of registration data as evidence of availability. For a
 # registrar that means offering a registered domain for sale, so the suite asserts
 # against every one of them.
 module NonAnswers

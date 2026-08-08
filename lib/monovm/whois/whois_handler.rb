@@ -4,21 +4,20 @@ require_relative "client"
 
 module MonoVM
   module Whois
-    # A single-domain handler shaped like the PHP package's +WhoisHandler+.
+    # A single-domain handler that wraps one lookup in an object.
     #
-    # Exists so that code being ported from +monovm/whois-php+ reads the same way
-    # here, and so the method names people already know keep working — including the
-    # camelCase ones, aliased at the bottom.
+    # Exists so that code written against camelCase WHOIS APIs reads the same way
+    # here — the camelCase method names are aliased at the bottom.
     #
     #   handler = MonoVM::Whois::WhoisHandler.whois("monovm.com")
     #   handler.available?     # => false
     #   handler.whois_message  # => the raw registry response
     #   handler.record.expires_on
     #
-    # One difference from the PHP behaviour is deliberate and cannot be aliased away.
-    # There, +isAvailable()+ returns false both for a registered domain and for a
-    # lookup that failed, and its detector reports a rate-limited or unreachable
-    # server as *available*. Here {#available?} is true only when availability was
+    # One deliberate difference from boolean-style WHOIS APIs: there, an
+    # +isAvailable()+ returns false both for a registered domain and for a
+    # lookup that failed, and a permissive detector reports a rate-limited or
+    # unreachable server as *available*. Here {#available?} is true only when availability was
     # positively established, and {#unknown?} exists to say "we could not find out".
     # Code that branches on +available?+ alone is safe; code that treats
     # +!available?+ as "registered" should ask {#registered?} instead.
@@ -93,9 +92,8 @@ module MonoVM
         result.status
       end
 
-      # Which rule decided, what it matched, and what every other rule said.
-      # The equivalent of the PHP +getAvailabilityDetails()+, but it reports the
-      # actual decision path rather than a fixed set of boolean flags.
+      # Which rule decided, what it matched, and what every other rule said —
+      # the actual decision path rather than a fixed set of boolean flags.
       #
       # @return [Hash]
       def availability_details
@@ -123,7 +121,7 @@ module MonoVM
       end
 
       # ------------------------------------------------------------------
-      # camelCase aliases, for parity with the PHP API
+      # camelCase aliases, for callers coming from camelCase WHOIS APIs
       # ------------------------------------------------------------------
 
       alias isAvailable available?

@@ -7,8 +7,7 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [1.0.0] - 2026-08-05
 
-First release. A Ruby counterpart to
-[monovm/whois-php](https://github.com/monovm/whois-php), written from scratch.
+First release.
 
 ### Added
 
@@ -41,17 +40,18 @@ First release. A Ruby counterpart to
 - **CLI** `monovm-whois`, with `--json`, `--details`, `--raw`, `--prefer`, `--timeout`,
   `--concurrency`, `--tlds`, `--[no-]cache`, `--[no-]colour` and `--tld-count`. Exits
   non-zero when any name came back inconclusive.
-- **`WhoisHandler`** with the PHP package's method names, camelCase aliases included.
+- **`WhoisHandler`**, a single-domain handler object, with camelCase method aliases
+  (`isAvailable`, `getWhoisMessage`, …) for code migrating from camelCase WHOIS APIs.
 - **Definition overrides** through `MONOVM_WHOIS_DEFINITIONS`, so a stale registry
   entry can be corrected without a gem release.
 - Error taxonomy under `MonoVM::Whois::Error`: `InvalidDomainError`,
   `UnsupportedTldError`, `DefinitionsError`, `ConnectionError`, `TimeoutError`,
   `ServerRefusedError`, `EmptyResponseError`.
 
-### Changed from the PHP implementation
+### Fail-safe design decisions
 
-Every difference points the same way — declining to guess where the PHP version
-answers "available". See the table in the README for the full list. The main ones:
+Every choice points the same way — declining to guess where a permissive heuristic
+would answer "available". See the table in the README for the full list. The main ones:
 
 - Rate limits, blocked clients, retired port 43 endpoints, HTTP 4xx/5xx and empty
   responses are `:unknown`, not `:available`.

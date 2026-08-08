@@ -4,8 +4,8 @@ module MonoVM
   module Whois
     # Base class for every error this gem raises.
     #
-    # The PHP package throws bare +\Exception+ objects, so callers can only
-    # rescue everything or nothing. Here the taxonomy is meaningful: callers who
+    # A library that raises bare exceptions leaves callers rescuing everything
+    # or nothing. Here the taxonomy is meaningful: callers who
     # just want "did it blow up" rescue {Error}, while callers that retry on a
     # busy registry but give up on a bad domain can discriminate.
     class Error < StandardError; end
@@ -44,7 +44,8 @@ module MonoVM
     # an answer (401/403/405/406/429/5xx).
     #
     # This is deliberately distinct from "the domain is registered". Conflating
-    # the two is what makes the PHP original report registered domains as free.
+    # the two is how a permissive detector ends up reporting registered domains
+    # as free.
     class ServerRefusedError < Error
       attr_reader :endpoint
 

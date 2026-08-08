@@ -12,7 +12,7 @@ module MonoVM
         # "your client is blocked" messages and "port 43 is retired, use RDAP"
         # banners contain none of the wording that means "registered", so every
         # later rule passes on them and the response eventually reaches whichever
-        # heuristic is loosest. In the PHP original that heuristic answers
+        # heuristic is loosest. In a permissive detector that heuristic answers
         # "available", which means a rate-limited registry reports its entire zone
         # as free to register.
         #

@@ -104,7 +104,7 @@ module MonoVM
         Checker.lookup(domains, options)
       end
 
-      # A single-domain handler with the PHP package's method names.
+      # A single-domain handler object, camelCase aliases included.
       #
       # @return [WhoisHandler]
       def handler(domain, **options)

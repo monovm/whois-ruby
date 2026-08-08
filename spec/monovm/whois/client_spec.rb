@@ -33,7 +33,7 @@ RSpec.describe MonoVM::Whois::Client do
     end
 
     it "reports unknown, not available, when the transport fails" do
-      # The distinction the PHP package loses. A timeout is not a free domain.
+      # The distinction a boolean verdict loses. A timeout is not a free domain.
       client = stub_client({ "x.com" => MonoVM::Whois::TimeoutError })
 
       result = client.lookup("x.com")

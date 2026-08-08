@@ -85,8 +85,8 @@ Metrics/PerceivedComplexity:
   Exclude:
     - "lib/monovm/whois/punycode.rb"
 
-# The camelCase aliases exist so code ported from monovm/whois-php keeps working
-# unchanged. That is the one place where matching the PHP API beats Ruby convention.
+# The camelCase aliases exist so code written against camelCase WHOIS APIs keeps
+# working unchanged. That is the one place where compatibility beats Ruby convention.
 Naming/MethodName:
   Exclude:
     - "lib/monovm/whois/whois_handler.rb"
