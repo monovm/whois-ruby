@@ -5,6 +5,12 @@ All notable changes to this project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this
 project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2026-08-08
+
+### Changed
+
+- README: link to [monovm.com](https://monovm.com) and an About section.
+
 ## [1.0.0] - 2026-08-05
 
 First release.
@@ -72,4 +78,5 @@ would answer "available". See the table in the README for the full list. The mai
 - The bundled RDAP bootstrap snapshot was taken 2026-07-23 and can be refreshed with
   `rake data:refresh_rdap`.
 
+[1.0.1]: https://github.com/monovm/whois-ruby/releases/tag/v1.0.1
 [1.0.0]: https://github.com/monovm/whois-ruby/releases/tag/v1.0.0

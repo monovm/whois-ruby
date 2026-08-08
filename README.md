@@ -3,7 +3,7 @@
 Domain WHOIS and RDAP lookups for Ruby, with availability detection that says
 "I don't know" instead of guessing.
 
-No runtime dependencies.
+No runtime dependencies. Built and maintained by [MonoVM](https://monovm.com).
 
 ```ruby
 require "monovm-whois-ruby"
@@ -343,6 +343,11 @@ COVERAGE=1 bundle exec rspec
 The offline suite never touches the network: HTTP is blocked by WebMock, and the
 socket transport is exercised against a loopback server the spec starts itself.
 
+## About MonoVM
+
+This gem is developed by [MonoVM](https://monovm.com), a provider of domain
+registration, VPS and dedicated server hosting.
+
 ## License
 
-MIT. See [LICENSE](LICENSE).
+MIT. See [LICENSE](LICENSE). Copyright © [MonoVM](https://monovm.com).
