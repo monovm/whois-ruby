@@ -1,0 +1,129 @@
+plugins:
+  - rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 3.1
+  NewCops: enable
+  SuggestExtensions: false
+  Exclude:
+    - "vendor/**/*"
+    - "pkg/**/*"
+    - "tmp/**/*"
+
+# Double quotes throughout, so adding an interpolation to a string is never also a
+# quote change in the diff.
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
+
+# LF, not the platform native ending. The gem is developed on Windows and consumed
+# everywhere; committing CRLF would show up as a whole-file diff for everyone else.
+Layout/EndOfLine:
+  EnforcedStyle: lf
+
+# The pattern tables are long frozen literals; splitting them to satisfy a line
+# budget would make them harder to compare against a registry's actual output.
+Layout/LineLength:
+  Max: 110
+  AllowedPatterns:
+    - '^\s*#'
+
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*"
+    - "*.gemspec"
+    # One declarative OptionParser block.
+    - "lib/monovm/whois/cli.rb"
+
+Metrics/ModuleLength:
+  Max: 200
+  Exclude:
+    - "lib/monovm/whois/availability/patterns.rb"
+    - "lib/monovm/whois/punycode.rb"
+
+# These classes are long because they are cohesive, not because they do several
+# things: a parser that knows every spelling of "expiry date", a CLI that declares its
+# flags, an RFC algorithm. Splitting them would scatter one idea across files.
+Metrics/ClassLength:
+  Max: 200
+
+# Keyword arguments do not have the positional-argument readability problem this cop
+# exists to catch. A value object taking sixteen named fields is clear; taking sixteen
+# positional ones would not be.
+Metrics/ParameterLists:
+  CountKeywordArgs: false
+
+Style/Documentation:
+  Enabled: true
+
+# Detection rules read as a sequence of guard clauses; that is the clearest
+# shape for them even when a method ends up with several exits.
+Metrics/MethodLength:
+  Max: 25
+  Exclude:
+    # RFC 3492's encode and decode are single algorithms; cutting them up would break
+    # the correspondence with the pseudocode they are transcribed from.
+    - "lib/monovm/whois/punycode.rb"
+    # One declarative block of option definitions.
+    - "lib/monovm/whois/cli.rb"
+
+Metrics/AbcSize:
+  Max: 30
+  Exclude:
+    - "lib/monovm/whois/punycode.rb"
+    - "lib/monovm/whois/cli.rb"
+
+Metrics/CyclomaticComplexity:
+  Max: 12
+  Exclude:
+    - "lib/monovm/whois/punycode.rb"
+
+Metrics/PerceivedComplexity:
+  Max: 12
+  Exclude:
+    - "lib/monovm/whois/punycode.rb"
+
+# The camelCase aliases exist so code ported from monovm/whois-php keeps working
+# unchanged. That is the one place where matching the PHP API beats Ruby convention.
+Naming/MethodName:
+  Exclude:
+    - "lib/monovm/whois/whois_handler.rb"
+
+# The gem is named monovm-whois, so `require "monovm-whois"` has to resolve — which
+# means the entry point must be lib/monovm-whois.rb, dash and all.
+Naming/FileName:
+  Exclude:
+    - "lib/monovm-whois.rb"
+
+# Names in the Punycode implementation mirror RFC 3492's pseudocode (k, n, q, t, h, m).
+# Lengthening them for this cop would make the transcription harder to verify.
+Naming/MethodParameterName:
+  Exclude:
+    - "lib/monovm/whois/punycode.rb"
+
+# Several spec files deliberately cover a family of classes together — every
+# availability rule, every transport, the small value objects — because what is under
+# test is how they relate, not each in isolation.
+RSpec/SpecFilePathFormat:
+  Enabled: false
+
+RSpec/DescribeClass:
+  Exclude:
+    - "spec/monovm/whois/availability/rules_spec.rb"
+    - "spec/monovm/whois/parser/parsers_spec.rb"
+    - "spec/monovm/whois/registry/sources_spec.rb"
+    - "spec/monovm/whois/transport/transports_spec.rb"
+    - "spec/monovm/whois/transport/middleware_spec.rb"
+    - "spec/monovm/whois/value_objects_spec.rb"
+    - "spec/network_spec.rb"
+
+RSpec/ExampleLength:
+  Max: 25
+
+RSpec/MultipleExpectations:
+  Max: 8
+
+RSpec/NestedGroups:
+  Max: 4

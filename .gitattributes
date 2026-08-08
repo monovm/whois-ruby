@@ -1,0 +1,7 @@
+# LF in the repository regardless of the platform it was committed from. The gem is
+# developed on Windows and consumed everywhere; without this, a tool that rewrites a
+# file (RuboCop's autocorrect, for one) turns it into a whole-file CRLF diff.
+* text=auto eol=lf
+
+*.png binary
+*.gem binary
