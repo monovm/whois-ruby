@@ -1,4 +1,4 @@
-# monovm-whois
+# monovm-whois-ruby
 
 Domain WHOIS and RDAP lookups for Ruby, with availability detection that says
 "I don't know" instead of guessing.
@@ -6,7 +6,7 @@ Domain WHOIS and RDAP lookups for Ruby, with availability detection that says
 No runtime dependencies.
 
 ```ruby
-require "monovm-whois"
+require "monovm-whois-ruby"
 
 MonoVM::Whois.available?("monovm.com")   # => false
 MonoVM::Whois.lookup("monovm.com").record.expires_on
@@ -16,13 +16,13 @@ MonoVM::Whois.whois(%w[monovm google.com])
 ## Installation
 
 ```ruby
-gem "monovm-whois"
+gem "monovm-whois-ruby"
 ```
 
 or
 
 ```sh
-gem install monovm-whois
+gem install monovm-whois-ruby
 ```
 
 Requires Ruby 3.1 or newer.

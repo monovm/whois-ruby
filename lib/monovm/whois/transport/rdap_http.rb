@@ -40,7 +40,8 @@ module MonoVM
           @open_timeout = open_timeout
           @read_timeout = read_timeout
           @verify_ssl = verify_ssl
-          @user_agent = user_agent || "monovm-whois/#{MonoVM::Whois::VERSION} (+https://github.com/monovm/whois-ruby)"
+          @user_agent = user_agent ||
+                        "monovm-whois-ruby/#{MonoVM::Whois::VERSION} (+https://github.com/monovm/whois-ruby)"
           super()
         end
 

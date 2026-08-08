@@ -91,10 +91,12 @@ Naming/MethodName:
   Exclude:
     - "lib/monovm/whois/whois_handler.rb"
 
-# The gem is named monovm-whois, so `require "monovm-whois"` has to resolve — which
-# means the entry point must be lib/monovm-whois.rb, dash and all.
+# The gem is named monovm-whois-ruby, so `require "monovm-whois-ruby"` has to
+# resolve — which means the entry point must be lib/monovm-whois-ruby.rb, dashes and
+# all. lib/monovm-whois.rb is kept as a shorter require alias.
 Naming/FileName:
   Exclude:
+    - "lib/monovm-whois-ruby.rb"
     - "lib/monovm-whois.rb"
 
 # Names in the Punycode implementation mirror RFC 3492's pseudocode (k, n, q, t, h, m).

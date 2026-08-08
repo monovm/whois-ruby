@@ -3,7 +3,7 @@
 require_relative "lib/monovm/whois/version"
 
 Gem::Specification.new do |spec|
-  spec.name     = "monovm-whois"
+  spec.name     = "monovm-whois-ruby"
   spec.version  = MonoVM::Whois::VERSION
   spec.authors  = ["MonoVM"]
   spec.email    = ["dev@monovm.com"]
@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
     "homepage_uri" => spec.homepage,
     "bug_tracker_uri" => "#{spec.homepage}/issues",
     "changelog_uri" => "#{spec.homepage}/blob/main/CHANGELOG.md",
-    "documentation_uri" => "https://rubydoc.info/gems/monovm-whois",
+    "documentation_uri" => "https://rubydoc.info/gems/monovm-whois-ruby",
     "rubygems_mfa_required" => "true"
   }
 
